@@ -53,16 +53,16 @@ function Calculator({ points, setPoints }) {
 
 			<hr />
 
+			<PointsList points={points} setPoints={setPoints} />
+
 			{points.length > 0 ? (
 				<Button
 					variant="danger"
-					className="mb-4 btn-block"
+					className="btn-block"
 					onClick={() => setPoints([])}>
 					Reset Points
 				</Button>
 			) : null}
-
-			<PointsList points={points} setPoints={setPoints} />
 		</>
 	);
 }
