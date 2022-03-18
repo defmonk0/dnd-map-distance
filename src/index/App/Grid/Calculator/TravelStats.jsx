@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 
 import Badge from "react-bootstrap/Badge";
 import Col from "react-bootstrap/Col";
@@ -9,6 +9,8 @@ import "./TravelStats/TravelStats.css";
 import scalePoint from "../shared/scalePoint";
 import useLocalStorage from "../../shared/useLocalStorage";
 
+import paces from "./TravelStats/paces.json";
+
 const epsRound = n => {
 	return Math.round((n + Number.EPSILON) * 100) / 100;
 };
@@ -16,6 +18,11 @@ const epsRound = n => {
 function TravelStats({ points, inScale, disScale }) {
 	const [traveled, setTraveled] = useLocalStorage("distance-traveled", 0);
 	const [travelSpeed, setTravelSpeed] = useLocalStorage("travel-speed", 0);
+	const [travelPerDay, setTravelPerDay] = useLocalStorage(
+		"travel-per-day",
+		8
+	);
+	const [showMore, setShowMore] = useState(false);
 
 	const distance = useMemo(() => {
 		let total = 0;
@@ -48,11 +55,13 @@ function TravelStats({ points, inScale, disScale }) {
 	}, [points, inScale, disScale]);
 
 	const totalTravelHours = epsRound(distance / travelSpeed);
-	const totalTravelDays = epsRound(distance / travelSpeed / 8);
+	const totalTravelDays = epsRound(distance / travelSpeed / travelPerDay);
 
 	const remainingDistance = distance - traveled;
 	const remainingTravelHours = epsRound(remainingDistance / travelSpeed);
-	const remainingTravelDays = epsRound(remainingDistance / travelSpeed / 8);
+	const remainingTravelDays = epsRound(
+		remainingDistance / travelSpeed / travelPerDay
+	);
 
 	return (
 		<>
@@ -79,32 +88,56 @@ function TravelStats({ points, inScale, disScale }) {
 					<FormControl
 						type="number"
 						value={travelSpeed}
-						onChange={e => setTravelSpeed(parseInt(e.target.value))}
+						onChange={e => setTravelSpeed(e.target.value)}
+					/>
+					<div>
+						{paces.map(
+							pace =>
+								(!pace.hidden || showMore) && (
+									<Badge
+										key={pace.type}
+										className="mr-1 pointer"
+										variant={pace?.color ?? "secondary"}
+										onClick={() =>
+											setTravelSpeed(pace.speed)
+										}>
+										{pace.type}
+									</Badge>
+								)
+						)}
+						<Badge
+							className="mr-1 pointer"
+							variant="light"
+							onClick={() => setShowMore(!showMore)}>
+							...
+						</Badge>
+					</div>
+				</Col>
+			</Row>
+
+			{/* TRAVEL PER DAY */}
+			<Row className="mb-3">
+				<Col>
+					<h5>Daily Travel (hours)</h5>
+				</Col>
+				<Col>
+					<FormControl
+						type="number"
+						value={travelPerDay}
+						onChange={e => setTravelPerDay(e.target.value)}
 					/>
 					<div>
 						<Badge
 							className="mr-1 pointer"
-							variant="success"
-							onClick={() => setTravelSpeed(2)}>
-							Slow
-						</Badge>
-						<Badge
-							className="mr-1 pointer"
-							variant="warning"
-							onClick={() => setTravelSpeed(3)}>
-							Normal
+							variant="secondary"
+							onClick={e => setTravelPerDay(8)}>
+							On Foot
 						</Badge>
 						<Badge
 							className="mr-1 pointer"
 							variant="danger"
-							onClick={() => setTravelSpeed(4)}>
-							Fast
-						</Badge>
-						<Badge
-							className="mr-1 pointer"
-							variant="info"
-							onClick={() => setTravelSpeed(5)}>
-							Ship
+							onClick={e => setTravelPerDay(24)}>
+							Sailing
 						</Badge>
 					</div>
 				</Col>

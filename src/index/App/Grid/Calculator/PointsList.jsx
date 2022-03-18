@@ -1,3 +1,6 @@
+import Accordion from "react-bootstrap/Accordion";
+import Card from "react-bootstrap/Card";
+
 import "./PointsList/PointsList.css";
 
 function PointsList({ points, setPoints }) {
@@ -18,27 +21,42 @@ function PointsList({ points, setPoints }) {
 	};
 
 	return (
-		<div className="max-sized">
-			<ol>
-				{points.length > 0 ? (
-					points.map((point, index) => (
-						<li
-							xs="12"
-							key={index}
-							onClick={() => removePoint(index)}
-							onMouseEnter={() => hightlightPoint(index, true)}
-							onMouseLeave={() => hightlightPoint(index, false)}>
-							({point.x}, {point.y})
-						</li>
-					))
-				) : (
-					<p>
-						No points supplied. Click the map on the left to start
-						adding points.
-					</p>
-				)}
-			</ol>
-		</div>
+		<Accordion>
+			<Card>
+				<Accordion.Toggle as={Card.Header} eventKey="0">
+					Points List
+				</Accordion.Toggle>
+				<Accordion.Collapse eventKey="0">
+					<Card.Body>
+						<div className="max-sized">
+							<ol>
+								{points.length > 0 ? (
+									points.map((point, index) => (
+										<li
+											xs="12"
+											key={index}
+											onClick={() => removePoint(index)}
+											onMouseEnter={() =>
+												hightlightPoint(index, true)
+											}
+											onMouseLeave={() =>
+												hightlightPoint(index, false)
+											}>
+											({point.x}, {point.y})
+										</li>
+									))
+								) : (
+									<p>
+										No points supplied. Click the map on the
+										left to start adding points.
+									</p>
+								)}
+							</ol>
+						</div>
+					</Card.Body>
+				</Accordion.Collapse>
+			</Card>
+		</Accordion>
 	);
 }
 

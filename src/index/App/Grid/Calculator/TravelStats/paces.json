@@ -1,0 +1,59 @@
+[
+	{
+		"type": "Slow",
+		"speed": 2,
+		"color": "success",
+		"hidden": true,
+		"hours": 8
+	},
+	{
+		"type": "Normal",
+		"speed": 3,
+		"color": "warning",
+		"hidden": false,
+		"hours": 8
+	},
+	{
+		"type": "Fast",
+		"speed": 4,
+		"color": "danger",
+		"hidden": true,
+		"hours": 8
+	},
+	{
+		"type": "Galley",
+		"speed": 4,
+		"hidden": true,
+		"hours": 8
+	},
+	{
+		"type": "Keelboat",
+		"speed": 1,
+		"hidden": true,
+		"hours": 24
+	},
+	{
+		"type": "Longship",
+		"speed": 3,
+		"hidden": true,
+		"hours": 8
+	},
+	{
+		"type": "Rowboat",
+		"speed": 1.5,
+		"hidden": true,
+		"hours": 8
+	},
+	{
+		"type": "Sailing Ship",
+		"speed": 2,
+		"hidden": false,
+		"hours": 24
+	},
+	{
+		"type": "Warship",
+		"speed": 2.5,
+		"hidden": true,
+		"hours": 24
+	}
+]
