@@ -9,7 +9,7 @@ function ScaleInput({ id, label, description, scale, setScale }) {
 				value={scale}
 				onChange={e => setScale(e.target.value)}
 			/>
-			<Form.Text className="text-muted">{description}</Form.Text>
+			<Form.Text muted>{description}</Form.Text>
 		</Form.Group>
 	);
 }

@@ -27,9 +27,20 @@ function useLocalStorage(key, initialValue) {
 			setStoredValue(valueToStore);
 			// Save to local storage
 			window.localStorage.setItem(key, JSON.stringify(valueToStore));
-		} catch (error) {
-			// A more advanced implementation would handle the error case
-			console.error(error);
+		} catch (e) {
+			switch (e.code) {
+				case 22:
+					alert(
+						"LocalStorage max size exceeded. " +
+							"Whatever you tried to do was too large. " +
+							"Consider looking into decreasing what is stored, " +
+							"or increase your maximum via browser settings."
+					);
+					break;
+				default:
+					console.error(`[${e.code}] ${e.name}: ${e.message}`);
+					break;
+			}
 		}
 	};
 

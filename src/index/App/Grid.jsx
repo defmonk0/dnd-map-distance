@@ -9,7 +9,10 @@ import "./Grid/Grid.css";
 
 function Grid() {
 	const [points, setPoints] = useLocalStorage("points", []);
-	const [userMap, setUserMap] = useLocalStorage(null);
+	const [userMap, setUserMap] = useLocalStorage("user-map", {
+		name: null,
+		data: null,
+	});
 
 	return (
 		<Row className="h-100">
@@ -22,6 +25,7 @@ function Grid() {
 				<Calculator
 					points={points}
 					setPoints={setPoints}
+					userMap={userMap}
 					setUserMap={setUserMap}
 				/>
 			</Col>

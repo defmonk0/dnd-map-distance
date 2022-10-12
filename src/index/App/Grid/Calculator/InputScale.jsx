@@ -25,18 +25,22 @@ function InputScaleDescription({ inScale, disScale }) {
 	);
 }
 
-function InputScaleFileUpload({ setUserMap }) {
+function InputScaleFileUpload({ userMap, setUserMap }) {
 	return (
 		<Row>
 			<Col>
 				<FileSelector
 					id="imageUpload"
-					label="Custom Map"
+					label={
+						userMap === null
+							? "Custom Map"
+							: "Custom Map: " + userMap.name
+					}
 					description="Upload a custom map file to use this tool for your own campaign."
 					onChange={file => {
 						const fr = new FileReader();
 						fr.addEventListener("load", () => {
-							setUserMap(fr.result);
+							setUserMap({ name: file.name, data: fr.result });
 						});
 
 						fr.readAsDataURL(file);
@@ -77,6 +81,7 @@ function InputScale({
 	setInScale,
 	disScale,
 	setDisScale,
+	userMap,
 	setUserMap,
 }) {
 	return (
@@ -88,7 +93,10 @@ function InputScale({
 					</Accordion.Toggle>
 					<Accordion.Collapse eventKey="0">
 						<Card.Body>
-							<InputScaleFileUpload setUserMap={setUserMap} />
+							<InputScaleFileUpload
+								userMap={userMap}
+								setUserMap={setUserMap}
+							/>
 							<InputScaleInputs
 								inScale={inScale}
 								disScale={disScale}

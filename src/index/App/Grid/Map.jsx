@@ -36,7 +36,7 @@ function Map({ points, setPoints, userMap }) {
 		<div className="position-relative">
 			<Canvas points={points} width={sizes.width} height={sizes.height} />
 			<Image
-				src={userMap ?? map}
+				src={userMap.data ?? map}
 				ref={imageRef}
 				className="left-image"
 				onMouseDown={addPoint}

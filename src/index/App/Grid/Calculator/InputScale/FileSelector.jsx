@@ -12,8 +12,11 @@ function FileSelector({ id, label, description, onChange }) {
 						onChange(file);
 					}
 				}}
+				onClick={e => {
+					e.target.value = null;
+				}}
 			/>
-			<Form.Text className="text-muted">{description}</Form.Text>
+			<Form.Text muted>{description}</Form.Text>
 		</Form.Group>
 	);
 }
