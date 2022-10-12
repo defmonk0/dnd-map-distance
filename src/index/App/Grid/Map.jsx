@@ -6,7 +6,9 @@ import Canvas from "./Map/Canvas";
 import useDimension from "./Map/useDimension";
 import map from "./Map/map.jpg";
 
-function Map({ points, setPoints }) {
+import "./Map/Map.css";
+
+function Map({ points, setPoints, userMap }) {
 	const imageRef = useRef(null);
 	const sizes = useDimension(imageRef);
 
@@ -34,9 +36,9 @@ function Map({ points, setPoints }) {
 		<div className="position-relative">
 			<Canvas points={points} width={sizes.width} height={sizes.height} />
 			<Image
-				src={map}
+				src={userMap ?? map}
 				ref={imageRef}
-				className="vh-100 w-auto d-block"
+				className="left-image"
 				onMouseDown={addPoint}
 			/>
 		</div>

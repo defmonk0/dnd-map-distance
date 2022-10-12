@@ -7,7 +7,7 @@ import InputScale from "./Calculator/InputScale";
 import TravelStats from "./Calculator/TravelStats";
 import useLocalStorage from "../shared/useLocalStorage";
 
-function Calculator({ points, setPoints }) {
+function Calculator({ points, setPoints, setUserMap }) {
 	const [inScale, setInScale] = useLocalStorage("input-scale", 25);
 	const [disScale, setDisScale] = useLocalStorage("distance-scale", 25);
 
@@ -16,7 +16,11 @@ function Calculator({ points, setPoints }) {
 			<Row>
 				<Col xs={12}>
 					<InputScale
-						{...{ inScale, setInScale, disScale, setDisScale }}
+						inScale={inScale}
+						setInScale={setInScale}
+						disScale={disScale}
+						setDisScale={setDisScale}
+						setUserMap={setUserMap}
 					/>
 				</Col>
 			</Row>

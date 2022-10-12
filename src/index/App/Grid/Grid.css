@@ -1,0 +1,5 @@
+.scroll {
+	overflow-y: scroll;
+	padding: 1rem 0;
+	max-height: 100vh;
+}

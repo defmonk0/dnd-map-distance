@@ -2,7 +2,7 @@ import Form from "react-bootstrap/Form";
 
 function ScaleInput({ id, label, description, scale, setScale }) {
 	return (
-		<Form.Group controlId="formBasicEmail">
+		<Form.Group controlId="formBasicInput">
 			<Form.Label>{label}</Form.Label>
 			<Form.Control
 				type="number"

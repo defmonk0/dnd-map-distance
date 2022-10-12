@@ -1,0 +1,7 @@
+.left-image {
+	max-height: 100vh;
+	max-width: 100%;
+
+	display: block;
+	align-self: center;
+}
